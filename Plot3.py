@@ -1,28 +1,36 @@
-from urllib import request
-from matplotlib.pyplot import colorbar
 from plotly import graph_objects as go
-
-# # Moedas comparadas:
-# # CHF - Franco suíço
-# # GBP - Libra esterlina
-# # EUR - Euro
-# # USD - Dólar
-# # Dados retirados da varíavel 'url'. Para verificar, descomentar o código abaixo
 # import requests
-# base_currency = 'EUR'
-# url = f"https://api.apilayer.com/fixer/2022-04-16?symbols?USD&base={base_currency}"
-# headers = { "apikey": "7bsw5Cw47URoFCdDngHsGZRrcTVC0gC4" }
-# resp = requests.get(url, headers)
-# print(resp.text)
+# import os
+# from dotenv import load_dotenv
+# import json
 
-locations = [ 'Spain', 'Portugal', 'France', 'Belgium', 'Netherlands', 'Germany', 'Austria', 'Ireland', 'Italy', 'Greece', 'Slovakia', 'Slovenia', 'Cyprus', 'Estonia', 'Latvia', 'Lithuania', 'Finland', 'Switzerland', 'Great Britain' ]
+# load_dotenv()
+# base_currency = 'CHF'
+# url = f"https://api.apilayer.com/fixer/2022-04-16?symbols?USD&base={base_currency}"
+# headers = { "apikey": os.getenv("API_KEY") }
+# resp = requests.get(url, headers)
+# print(json.loads(resp.text)['rates']['USD'])
+
+"""
+CHF - Franco suíço
+GBP - Libra esterlina
+EUR - Euro
+USD - Dólar
+Dados retirados da varíavel 'url'. Para verificar, descomentar o código acima e substituir a variável base_currency
+por um dos valores abaixo
+"""
+CHF = 1.060323
+GBP = 1.036
+EUR = 1.08438
+
+locations = ['Spain', 'Portugal', 'France', 'Belgium', 'Netherlands', 'Germany', 'Austria', 'Ireland', 'Italy', 'Greece', 'Slovakia', 'Slovenia', 'Cyprus', 'Estonia', 'Latvia', 'Lithuania', 'Finland', 'Switzerland', 'Great Britain']
 
 data = dict(
     type='choropleth', 
     locationmode='country names', 
     colorscale=['blue', 'yellow'],
     locations=locations, 
-    z=[ 1.081438, 1.081438, 1.081438, 1.081438, 1.081438, 1.081438, 1.081438, 1.081438, 1.081438, 1.081438, 1.081438, 1.081438, 1.081438, 1.081438, 1.081438, 1.081438, 1.081438, 1.060323, 1.036 ]
+    z=[EUR, EUR, EUR, EUR, EUR, EUR, EUR, EUR, EUR, EUR, EUR, EUR, EUR, EUR, EUR, EUR, EUR, CHF, GBP]
 )
 
 map = go.Figure(data=[data])
